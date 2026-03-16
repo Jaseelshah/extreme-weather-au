@@ -89,11 +89,41 @@ def load_ica_events(conn: sqlite3.Connection, events: list[dict]) -> int:
     return inserted
 
 
+def load_disaster_declarations(conn: sqlite3.Connection, events: list[dict]) -> int:
+    """Batch-insert DisasterAssist events. Returns number of new rows."""
+    if not events:
+        logger.warning("No DisasterAssist events to load")
+        return 0
+
+    before = _count_rows(conn, "disaster_declarations")
+
+    conn.executemany(
+        """
+        INSERT OR IGNORE INTO disaster_declarations
+            (event_date, location, state, latitude, longitude,
+             hazard_type, description, impact_summary, source)
+        VALUES
+            (:event_date, :location, :state, :latitude, :longitude,
+             :hazard_type, :description, :impact_summary, :source)
+        """,
+        events,
+    )
+    conn.commit()
+
+    after    = _count_rows(conn, "disaster_declarations")
+    inserted = after - before
+    skipped  = len(events) - inserted
+
+    logger.info(f"DisasterAssist: Inserted {inserted} new events (skipped {skipped} duplicates)")
+    return inserted
+
+
 def get_db_stats(conn: sqlite3.Connection) -> dict:
     """Row counts and basic stats — logged at the end of each pipeline run."""
     stats = {
-        "storm_events_total":    _count_rows(conn, "storm_events"),
-        "financial_impacts_total": _count_rows(conn, "financial_impacts"),
+        "storm_events_total":      _count_rows(conn, "storm_events"),
+        "financial_impacts_total":  _count_rows(conn, "financial_impacts"),
+        "disaster_declarations_total": _count_rows(conn, "disaster_declarations"),
     }
 
     min_date, max_date = conn.execute(
@@ -112,6 +142,14 @@ def get_db_stats(conn: sqlite3.Connection) -> dict:
     stats["events_by_hazard"] = dict(
         conn.execute(
             "SELECT hazard_type, COUNT(*) FROM storm_events "
+            "GROUP BY hazard_type ORDER BY COUNT(*) DESC"
+        ).fetchall()
+    )
+
+    # Include declaration stats
+    stats["declarations_by_hazard"] = dict(
+        conn.execute(
+            "SELECT hazard_type, COUNT(*) FROM disaster_declarations "
             "GROUP BY hazard_type ORDER BY COUNT(*) DESC"
         ).fetchall()
     )

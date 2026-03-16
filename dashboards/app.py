@@ -33,6 +33,11 @@ HAZARD_COLORS = {
     "hail":      "#9d4edd",
     "tornado":   "#f77f00",
     "lightning": "#ffd60a",
+    "flood":     "#0077b6",
+    "bushfire":  "#d62828",
+    "cyclone":   "#00b4d8",
+    "storm":     "#48bfe3",
+    "other":     "#6b7280",
 }
 
 STATE_COLORS = {

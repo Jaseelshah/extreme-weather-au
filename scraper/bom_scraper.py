@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 # Scrapes storm events from the BOM Severe Storms Archive.
 #
 # The archive has a CGI form that returns CSV — one request per storm type.
