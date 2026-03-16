@@ -37,11 +37,12 @@ ICA_CATASTROPHE_URL = (
 )
 
 
-# ── DisasterAssist ────────────────────────────────────────────────────────
-# Government disaster declarations — supplements BOM with official declarations
-# and broader hazard types (floods, bushfires, cyclones) not in the storm archive.
+# ── NSW Government Disaster Declarations ─────────────────────────────────
+# Official disaster declarations from nsw.gov.au — supplements BOM with
+# floods, bushfires, cyclones, and other hazards not in the storm archive.
+# Pages are JS-rendered so we use a seed CSV with pre-scraped data.
 
-DISASTER_ASSIST_URL = "https://www.disasterassist.gov.au/find-a-disaster/australian-disasters"
+NSW_DECLARATIONS_URL = "https://www.nsw.gov.au/emergency/recovery/natural-disaster-declarations"
 
 
 # ── HTTP settings ─────────────────────────────────────────────────────────────
