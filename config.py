@@ -37,6 +37,13 @@ ICA_CATASTROPHE_URL = (
 )
 
 
+# ── DisasterAssist ────────────────────────────────────────────────────────
+# Government disaster declarations — supplements BOM with official declarations
+# and broader hazard types (floods, bushfires, cyclones) not in the storm archive.
+
+DISASTER_ASSIST_URL = "https://www.disasterassist.gov.au/find-a-disaster/australian-disasters"
+
+
 # ── HTTP settings ─────────────────────────────────────────────────────────────
 
 REQUEST_TIMEOUT = 30    # seconds

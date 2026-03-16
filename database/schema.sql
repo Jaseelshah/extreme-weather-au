@@ -9,8 +9,10 @@
 --   - All dates stored as ISO 8601 (YYYY-MM-DD) text for portability
 --
 -- TABLE OVERVIEW:
---   storm_events       → Raw BOM storm data (one row per event)
---   financial_impacts   → Raw ICA catastrophe data (one row per declared catastrophe)
+--   storm_events              → Raw BOM storm data (one row per event)
+--   financial_impacts         → Raw ICA catastrophe data (one row per declared catastrophe)
+--   disaster_declarations     → Raw DisasterAssist disaster declaration data
+--   data_quality_log          → Validation issues found during pipeline runs
 --   monthly_events_by_state   → Transformed: monthly event counts per state
 --   annual_financial_by_state → Transformed: annual financial losses per state
 --   significant_events        → Transformed: most significant event per state per year
@@ -64,6 +66,43 @@ CREATE TABLE IF NOT EXISTS financial_impacts (
 
 CREATE INDEX IF NOT EXISTS idx_fin_year ON financial_impacts(year);
 CREATE INDEX IF NOT EXISTS idx_fin_state ON financial_impacts(state);
+
+
+-- Disaster declarations from DisasterAssist.gov.au
+CREATE TABLE IF NOT EXISTS disaster_declarations (
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_date          TEXT NOT NULL,                  -- ISO 8601: YYYY-MM-DD
+    location            TEXT DEFAULT '',
+    state               TEXT NOT NULL,
+    latitude            REAL,
+    longitude           REAL,
+    hazard_type         TEXT NOT NULL,                  -- flood, bushfire, cyclone, storm, etc.
+    description         TEXT DEFAULT '',
+    impact_summary      TEXT DEFAULT '',                -- deaths, injuries, property damage
+    source              TEXT DEFAULT 'DisasterAssist.gov.au',
+    scraped_at          TEXT DEFAULT (datetime('now')),
+
+    -- Prevent duplicate entries
+    UNIQUE(event_date, state, hazard_type, description)
+);
+
+CREATE INDEX IF NOT EXISTS idx_decl_date ON disaster_declarations(event_date);
+CREATE INDEX IF NOT EXISTS idx_decl_state ON disaster_declarations(state);
+CREATE INDEX IF NOT EXISTS idx_decl_hazard ON disaster_declarations(hazard_type);
+
+
+-- ── Data Quality Log ──────────────────────────────────────────────────────
+-- Tracks validation issues found during pipeline runs
+
+CREATE TABLE IF NOT EXISTS data_quality_log (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    check_name      TEXT NOT NULL,          -- e.g. "missing_coordinates", "future_date"
+    severity        TEXT NOT NULL,           -- "warning" or "error"
+    table_name      TEXT NOT NULL,           -- which table the issue is in
+    record_count    INTEGER DEFAULT 0,       -- how many records affected
+    details         TEXT DEFAULT '',
+    checked_at      TEXT DEFAULT (datetime('now'))
+);
 
 
 -- ── Transformed / Analytics Tables ──────────────────────────────────────────
@@ -129,6 +168,36 @@ CREATE TABLE IF NOT EXISTS events_by_hazard_type (
     total_events    INTEGER NOT NULL,
     computed_at     TEXT DEFAULT (datetime('now'))
 );
+
+
+-- Combined events view — joins all three data sources into a unified dataset
+-- This is the "master" view that satisfies the case study requirement for a
+-- single dataset with: date, location, state, lat/long, hazard type,
+-- description, impact summary, and financial impact.
+CREATE TABLE IF NOT EXISTS combined_events (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_date      TEXT NOT NULL,
+    year            INTEGER,
+    month           TEXT,                   -- YYYY-MM
+    location        TEXT DEFAULT '',
+    state           TEXT NOT NULL,
+    latitude        REAL,
+    longitude       REAL,
+    hazard_type     TEXT NOT NULL,
+    description     TEXT DEFAULT '',
+    impact_summary  TEXT DEFAULT '',        -- injuries, deaths, property damage
+    financial_impact_m  REAL,              -- insured losses in A$M (from ICA)
+    claims_count    INTEGER,               -- insurance claims (from ICA)
+    data_source     TEXT NOT NULL,          -- BOM, ICA, DisasterAssist
+    computed_at     TEXT DEFAULT (datetime('now')),
+
+    UNIQUE(event_date, state, hazard_type, location, data_source)
+);
+
+CREATE INDEX IF NOT EXISTS idx_combined_date ON combined_events(event_date);
+CREATE INDEX IF NOT EXISTS idx_combined_state ON combined_events(state);
+CREATE INDEX IF NOT EXISTS idx_combined_hazard ON combined_events(hazard_type);
+CREATE INDEX IF NOT EXISTS idx_combined_month ON combined_events(month);
 
 
 -- ── Audit / Pipeline Log ────────────────────────────────────────────────────

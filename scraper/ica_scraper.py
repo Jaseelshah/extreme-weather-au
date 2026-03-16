@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 # Downloads and parses the ICA Historical Catastrophe List spreadsheet.
 #
 # Two things made this annoying:

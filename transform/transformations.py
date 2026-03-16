@@ -6,9 +6,6 @@
 #
 # Each transform does DELETE + INSERT rather than UPSERT so re-runs always
 # produce a clean consistent state.
-#
-# TODO: expose a --table flag so individual transforms can be re-run without
-#       touching the others
 
 import logging
 import re
@@ -23,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 def run_all_transformations(conn: sqlite3.Connection) -> None:
-    """Run all five transforms in sequence against the given connection."""
+    """Run all transforms in sequence against the given connection."""
     logger.info("Starting transformations...")
 
     transform_monthly_events_by_state(conn)
@@ -31,6 +28,7 @@ def run_all_transformations(conn: sqlite3.Connection) -> None:
     transform_annual_financial_by_state(conn)
     transform_significant_events(conn)
     transform_events_by_hazard_type(conn)
+    transform_combined_events(conn)
 
     logger.info("All transformations complete.")
 
@@ -40,16 +38,34 @@ def transform_monthly_events_by_state(conn: sqlite3.Connection) -> None:
     logger.info("Transform: Monthly events by state (from 2005)")
 
     conn.execute("DELETE FROM monthly_events_by_state")
+
+    # Include both BOM storm events AND disaster declarations
     conn.execute("""
         INSERT OR REPLACE INTO monthly_events_by_state
             (year_month, state, hazard_type, event_count)
-        SELECT
-            substr(event_date, 1, 7) AS year_month,
-            state,
-            hazard_type,
-            COUNT(*)                 AS event_count
-        FROM storm_events
-        WHERE event_date >= '2005-01-01'
+        SELECT year_month, state, hazard_type, SUM(cnt) AS event_count
+        FROM (
+            SELECT
+                substr(event_date, 1, 7) AS year_month,
+                state,
+                hazard_type,
+                COUNT(*) AS cnt
+            FROM storm_events
+            WHERE event_date >= '2005-01-01'
+            GROUP BY year_month, state, hazard_type
+
+            UNION ALL
+
+            SELECT
+                substr(event_date, 1, 7) AS year_month,
+                state,
+                hazard_type,
+                COUNT(*) AS cnt
+            FROM disaster_declarations
+            WHERE event_date >= '2005-01-01'
+              AND hazard_type NOT IN ('rain', 'hail', 'wind', 'tornado', 'lightning')
+            GROUP BY year_month, state, hazard_type
+        )
         GROUP BY year_month, state, hazard_type
         ORDER BY year_month, state
     """)
@@ -64,15 +80,32 @@ def transform_monthly_events_by_hazard(conn: sqlite3.Connection) -> None:
     logger.info("Transform: Monthly events by hazard type (from 2005)")
 
     conn.execute("DELETE FROM monthly_events_by_hazard")
+
+    # Include both BOM storm events AND disaster declarations
     conn.execute("""
         INSERT OR REPLACE INTO monthly_events_by_hazard
             (year_month, hazard_type, event_count)
-        SELECT
-            substr(event_date, 1, 7) AS year_month,
-            hazard_type,
-            COUNT(*)                 AS event_count
-        FROM storm_events
-        WHERE event_date >= '2005-01-01'
+        SELECT year_month, hazard_type, SUM(cnt) AS event_count
+        FROM (
+            SELECT
+                substr(event_date, 1, 7) AS year_month,
+                hazard_type,
+                COUNT(*) AS cnt
+            FROM storm_events
+            WHERE event_date >= '2005-01-01'
+            GROUP BY year_month, hazard_type
+
+            UNION ALL
+
+            SELECT
+                substr(event_date, 1, 7) AS year_month,
+                hazard_type,
+                COUNT(*) AS cnt
+            FROM disaster_declarations
+            WHERE event_date >= '2005-01-01'
+              AND hazard_type NOT IN ('rain', 'hail', 'wind', 'tornado', 'lightning')
+            GROUP BY year_month, hazard_type
+        )
         GROUP BY year_month, hazard_type
         ORDER BY year_month
     """)
@@ -168,14 +201,26 @@ def transform_events_by_hazard_type(conn: sqlite3.Connection) -> None:
     logger.info("Transform: Total events by hazard type (from 2005)")
 
     conn.execute("DELETE FROM events_by_hazard_type")
+
+    # Include both BOM storms and disaster declarations
     conn.execute("""
         INSERT OR REPLACE INTO events_by_hazard_type
             (hazard_type, total_events)
-        SELECT
-            hazard_type,
-            COUNT(*) AS total_events
-        FROM storm_events
-        WHERE event_date >= '2005-01-01'
+        SELECT hazard_type, SUM(cnt) AS total_events
+        FROM (
+            SELECT hazard_type, COUNT(*) AS cnt
+            FROM storm_events
+            WHERE event_date >= '2005-01-01'
+            GROUP BY hazard_type
+
+            UNION ALL
+
+            SELECT hazard_type, COUNT(*) AS cnt
+            FROM disaster_declarations
+            WHERE event_date >= '2005-01-01'
+              AND hazard_type NOT IN ('rain', 'hail', 'wind', 'tornado', 'lightning')
+            GROUP BY hazard_type
+        )
         GROUP BY hazard_type
         ORDER BY total_events DESC
     """)
@@ -183,6 +228,103 @@ def transform_events_by_hazard_type(conn: sqlite3.Connection) -> None:
 
     count = conn.execute("SELECT COUNT(*) FROM events_by_hazard_type").fetchone()[0]
     logger.info(f"  → {count} hazard types counted")
+
+
+def transform_combined_events(conn: sqlite3.Connection) -> None:
+    """
+    Build the unified combined_events table joining all three data sources.
+
+    This satisfies the case study requirement for a single dataset with all fields:
+    date, location, state, lat/long, hazard type, description, impact summary,
+    and financial impact.
+    """
+    logger.info("Transform: Building combined events view (all sources)")
+
+    conn.execute("DELETE FROM combined_events")
+
+    # 1. BOM storm events (no financial data, no impact summary)
+    conn.execute("""
+        INSERT OR IGNORE INTO combined_events
+            (event_date, year, month, location, state, latitude, longitude,
+             hazard_type, description, impact_summary, financial_impact_m,
+             claims_count, data_source)
+        SELECT
+            event_date,
+            CAST(substr(event_date, 1, 4) AS INTEGER),
+            substr(event_date, 1, 7),
+            nearest_town,
+            state,
+            latitude,
+            longitude,
+            hazard_type,
+            description,
+            '',
+            NULL,
+            NULL,
+            'BOM'
+        FROM storm_events
+        WHERE event_date >= '2005-01-01'
+    """)
+
+    # 2. ICA financial impacts (have financial data but no lat/long)
+    rows = conn.execute("""
+        SELECT year, event_name, hazard_type, state, insured_losses_m, claims_count
+        FROM financial_impacts
+        WHERE year >= 2005
+    """).fetchall()
+
+    for year, event_name, hazard_type, states_str, losses, claims in rows:
+        for state in _split_states(states_str):
+            conn.execute("""
+                INSERT OR IGNORE INTO combined_events
+                    (event_date, year, month, location, state, latitude, longitude,
+                     hazard_type, description, impact_summary, financial_impact_m,
+                     claims_count, data_source)
+                VALUES (?, ?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?, ?, 'ICA')
+            """, (
+                f"{year}-01-01",  # ICA only has year granularity
+                year,
+                f"{year}-01",
+                "",
+                state,
+                hazard_type,
+                event_name,
+                f"{claims or 0} insurance claims" if claims else "",
+                losses,
+                claims,
+            ))
+
+    # 3. Disaster declarations (have impact summaries but no financial data)
+    conn.execute("""
+        INSERT OR IGNORE INTO combined_events
+            (event_date, year, month, location, state, latitude, longitude,
+             hazard_type, description, impact_summary, financial_impact_m,
+             claims_count, data_source)
+        SELECT
+            event_date,
+            CAST(substr(event_date, 1, 4) AS INTEGER),
+            substr(event_date, 1, 7),
+            location,
+            state,
+            latitude,
+            longitude,
+            hazard_type,
+            description,
+            impact_summary,
+            NULL,
+            NULL,
+            'DisasterAssist'
+        FROM disaster_declarations
+        WHERE event_date >= '2005-01-01'
+    """)
+
+    conn.commit()
+
+    count = conn.execute("SELECT COUNT(*) FROM combined_events").fetchone()[0]
+    sources = dict(conn.execute(
+        "SELECT data_source, COUNT(*) FROM combined_events GROUP BY data_source"
+    ).fetchall())
+    logger.info(f"  → {count} rows in combined_events ({sources})")
 
 
 def _split_states(states_str: str) -> list[str]:
