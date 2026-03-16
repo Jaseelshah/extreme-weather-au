@@ -1,0 +1,166 @@
+agrn,event_date,end_date,location,state,hazard_type,description,lga_count
+1264,2025-12-27,,Muswellbrook,NSW,bushfire,Muswellbrook NSW Bushfire,1
+1263,2026-01-07,,Bega Valley and Eurobodalla,NSW,bushfire,Eurobodalla and Bega Valley NSW Bushfire,2
+1262,2025-12-19,,Port Macquarie-Hastings,NSW,bushfire,Port Macquarie-Hastings NSW Bushfire,1
+1261,2025-12-16,,Tenterfield,NSW,bushfire,Tenterfield NSW Bushfire,1
+1260,2026-01-14,,Bega and Bellingen and Northern Beaches,NSW,storm,NSW Severe Weather Event,3
+1252,2025-11-26,,Parkes,NSW,bushfire,Parkes NSW Bushfire,1
+1247,2025-11-26,,Blacktown and Gwydir and Narromine,NSW,storm,NSW Severe Weather Event,7
+1246,2025-11-16,,Lithgow,NSW,bushfire,Lithgow NSW Bushfire,1
+1245,2025-11-09,,Dungog,NSW,bushfire,Dungog NSW Bushfire,1
+1244,2025-11-05,,Mid-Western Regional,NSW,bushfire,Mid-Western Regional NSW Bushfire,1
+1239,2025-12-09,,Lithgow and Mid-Western Regional,NSW,bushfire,Lithgow and Mid-Western Regional NSW Bushfire,2
+1238,2025-08-19,,Wollondilly and Camden,NSW,storm,Wollondilly Shire and Camden Severe Weather Event,2
+1237,2025-10-06,,Kempsey,NSW,bushfire,Kempsey NSW Bushfire,1
+1236,2025-10-23,,Tenterfield,NSW,bushfire,Tenterfield NSW Bushfire,1
+1235,2025-09-25,,Clarence Valley,NSW,bushfire,Clarence Valley NSW Bushfire,1
+1232,2025-12-06,,Lake Macquarie,NSW,bushfire,NSW Lake Macquarie Bushfire,1
+1231,2025-11-17,,Mid Coast,NSW,bushfire,Mid Coast NSW Bushfires,1
+1230,2025-11-27,,Dubbo and Warrumbungle,NSW,bushfire,Dubbo and Warrumbungle Bushfire,2
+1229,2025-12-06,,Central Coast,NSW,bushfire,Central Coast Bushfires,1
+1228,2025-11-26,,Upper Hunter and Muswellbrook,NSW,bushfire,Upper Hunter and Muswellbrook Bushfires,2
+1217,2025-06-30,,Bega Valley and Wingecarribee,NSW,flood,NSW South Coast Severe Weather,2
+1216,2025-07-31,,Armidale and Dungog and Maitland,NSW,flood,NSW Severe Weather Event,13
+1215,2025-04-25,,Central Coast and MidCoast,NSW,storm,NSW East Coast Storms,2
+1212,2025-05-18,,NSW East Coast,NSW,flood,NSW East Coast Severe Weather from 18 May 2025,25
+1211,2025-03-22,,Far West NSW,NSW,flood,Far West NSW Flooding from 22 March 2025,5
+1207,2024-12-07,,Griffith and Lockhart,NSW,storm,NSW Griffith and Lockhart Storms,2
+1206,2025-01-28,,Walgett and Coonamble,NSW,bushfire,NSW Walgett and Coonamble Bushfires,2
+1205,2024-12-04,,Cabonne,NSW,storm,NSW Cabonne Shire Storms,1
+1204,2025-03-28,,Gunnedah and Gwydir and Moree,NSW,storm,NSW Severe Storms from 28 March 2025,6
+1203,2025-02-26,,Narrabri and Warrumbungle,NSW,bushfire,NSW Warrumbungle and Narrabri Bushfires,2
+1200,2025-02-08,,Bega Valley and Snowy Monaro,NSW,storm,NSW Bega Valley and Snowy Monaro Storms,2
+1199,2025-01-27,,Gwydir and Narrabri,NSW,bushfire,NSW Narrabri and Gwydir Bushfire,2
+1198,2025-03-03,,Northern NSW,NSW,cyclone,NSW Tropical Cyclone Alfred Severe Weather,19
+1197,2025-01-05,,Hawkesbury,NSW,bushfire,Hawkesbury NSW Bushfire,1
+1196,2024-12-27,,Mid-Western,NSW,bushfire,Mid-Western NSW Bushfires,1
+1193,2024-12-23,,Bathurst and Lithgow,NSW,bushfire,Bathurst and Lithgow NSW Bushfire,2
+1192,2024-12-27,,Tamworth and Uralla,NSW,bushfire,Tamworth and Uralla NSW Bushfires,2
+1191,2024-12-16,,Singleton,NSW,bushfire,Singleton NSW Bushfire,1
+1190,2024-12-27,,Yass Valley,NSW,bushfire,Yass Valley NSW Bushfire,1
+1189,2024-12-27,,Muswellbrook and Singleton,NSW,bushfire,Singleton and Muswellbrook NSW Bushfires,2
+1184,2025-02-10,,Hilltops,NSW,storm,NSW Hilltops Severe Weather,1
+1182,2024-11-25,,Gilgandra and Walgett,NSW,storm,NSW Gilgandra and Walgett Storms,2
+1178,2024-11-30,,Hilltops and Lockhart,NSW,storm,NSW Hilltops and Lockhart Storms,2
+1177,2024-11-25,,Snowy Valleys,NSW,storm,NSW Snowy Valley Storms,1
+1173,2024-11-07,,Kyogle,NSW,storm,NSW Kyogle Storms,1
+1172,2024-11-25,,Byron Shire,NSW,storm,NSW Byron Shire Storms,1
+1170,2025-01-15,,Greater Sydney and Hunter,NSW,storm,NSW Severe Weather and Storms,21
+1162,2024-09-24,,Clarence Valley and Lismore,NSW,storm,NSW North Coast Storms,2
+1159,2024-08-23,,Muswellbrook,NSW,earthquake,NSW Muswellbrook Earthquakes,1
+1157,2024-11-17,,Walgett,NSW,storm,Walgett NSW Storm,1
+1156,2024-09-02,,Tenterfield,NSW,bushfire,Tenterfield NSW Bushfire,1
+1155,2024-08-23,,Wingecarribee,NSW,storm,Wingecarribee NSW Storm,1
+1151,2024-08-11,,Lismore,NSW,storm,North Coast NSW Severe Weather,1
+1149,2024-10-17,,Broken Hill and Central Darling,NSW,storm,NSW Far West Region Storm,3
+1141,2024-02-05,,Central Darling,NSW,flood,Central Darling NSW Storm and Floods,1
+1140,2023-12-08,,Singleton,NSW,bushfire,Singleton NSW Bushfire,1
+1139,2023-12-06,,Mid-Western,NSW,bushfire,Mid-Western NSW Bushfire,1
+1138,2023-12-04,,Richmond Valley,NSW,bushfire,Richmond Valley NSW Bushfire,1
+1137,2023-11-19,,Parkes,NSW,bushfire,Parkes NSW Bushfire,1
+1136,2023-11-11,,Lithgow,NSW,bushfire,Lithgow NSW Bushfire,1
+1135,2023-10-14,,Byron,NSW,bushfire,Byron NSW Bushfire,1
+1134,2023-10-26,,Tamworth,NSW,bushfire,Tamworth NSW Bushfire,1
+1133,2023-10-01,,Lake Macquarie,NSW,bushfire,Lake Macquarie NSW Bushfire,1
+1132,2023-09-20,,Snowy Monaro,NSW,bushfire,Snowy Monaro NSW Bushfire,1
+1131,2023-08-10,,Upper Hunter,NSW,bushfire,Upper Hunter NSW Bushfire,1
+1129,2024-06-04,,Greater Sydney and Illawarra,NSW,flood,NSW Severe Weather and Flooding,11
+1127,2024-05-09,,Central Coast and Goulburn and Kiama,NSW,flood,NSW Severe Weather and Flooding,3
+1121,2024-01-21,,Clarence Valley,NSW,bushfire,Clarence Valley NSW Bushfires,1
+1119,2024-04-01,,Eastern NSW,NSW,flood,NSW East Coast Flooding,34
+1114,2023-12-07,,Inverell and Tenterfield,NSW,bushfire,Inverell and Tenterfield NSW Bushfires,2
+1112,2023-12-09,,Armidale,NSW,bushfire,Armidale NSW Bushfires,1
+1105,2024-01-06,,Bourke and Cobar,NSW,flood,Western NSW Storms and Floods,2
+1101,2023-12-31,,Lismore and Tweed,NSW,flood,NSW Storms and Floods,2
+1100,2023-12-25,,Bega Valley and Eurobodalla,NSW,flood,NSW Storms and Floods,3
+1099,2023-09-11,,Singleton,NSW,bushfire,Singleton NSW Bushfires,1
+1093,2023-12-08,,Narrabri,NSW,bushfire,Narrabri NSW Bushfires,1
+1092,2023-12-14,,Cessnock,NSW,bushfire,Cessnock NSW Bushfires,1
+1091,2023-10-22,,Muswellbrook and Upper Hunter,NSW,bushfire,Hunter NSW Bushfires,2
+1090,2023-09-20,,Cessnock and Dungog and Maitland,NSW,bushfire,Lower Hunter NSW Bushfires,4
+1089,2023-09-20,,Mid Coast,NSW,bushfire,Mid Coast NSW Bushfires,1
+1086,2023-11-28,,Bega Valley and Eurobodalla,NSW,flood,NSW Severe Weather and Flooding,5
+1084,2023-10-02,,Snowy Monaro,NSW,bushfire,Snowy Monaro NSW Bushfires,1
+1083,2023-10-02,,Mid-Western,NSW,bushfire,Mid-Western NSW Bushfires,1
+1081,2023-11-14,,Walgett,NSW,bushfire,North Western NSW Bushfires,1
+1077,2023-10-17,,Mid-Western,NSW,bushfire,Mid-Western NSW Bushfires,1
+1076,2023-10-16,,Kempsey and Mid Coast,NSW,bushfire,Mid North NSW Bushfires,3
+1075,2023-10-13,,Clarence Valley and Inverell,NSW,bushfire,Far North NSW Bushfires,4
+1071,2023-08-21,,Armidale and Clarence Valley,NSW,bushfire,North Eastern NSW Bushfires,4
+1070,2023-10-03,,Bega Valley,NSW,bushfire,Bega Valley NSW Bushfire,1
+1066,2023-02-11,,Upper Lachlan and Yass Valley,NSW,bushfire,Upper Lachlan and Yass Valley Bushfires,2
+1065,2023-01-25,,Cootamundra-Gundagai,NSW,bushfire,Cootamundra Gundagai Bushfires,1
+1057,2023-03-12,,Cootamundra-Gundagai and Hilltops,NSW,flood,Cootamundra-Gundagai and Hilltops Storm and Flooding,2
+1056,2023-03-16,,Cobar and Upper Lachlan,NSW,bushfire,Upper Lachlan Bushfires,2
+1055,2023-02-17,,Blayney and Cabonne and Cowra,NSW,bushfire,Western and North West NSW Bushfires,5
+1054,2023-03-01,,Gwydir and Moree Plains and Narrabri,NSW,bushfire,Gwydir Moree Plains and Narrabri NSW Bushfires,3
+1053,2023-01-18,,Gwydir and Narrabri,NSW,bushfire,Gwydir and Narrabri NSW Bushfires,2
+1052,2023-03-06,,Bathurst and Blayney and Dubbo,NSW,bushfire,NSW Bushfires 6 March 2023,12
+1049,2023-02-09,,Dubbo and Wollongong,NSW,storm,Dubbo and Wollongong Severe Storm,2
+1047,2023-02-03,,Port Macquarie Hastings,NSW,storm,Port Macquarie Hastings Severe Storm,1
+1034,2022-09-14,,Eastern NSW,NSW,flood,NSW Flooding from 14 September 2022,61
+1030,2022-08-04,,Southern and Central West NSW,NSW,flood,Southern and Central West NSW Flooding,28
+1025,2022-06-27,,Greater Sydney and NSW,NSW,flood,NSW Severe Weather and Flooding,51
+1027,2022-04-19,,Wingecarribee,NSW,storm,Wingecarribee Severe Storm,1
+1014,2022-03-15,,Broken Hill,NSW,storm,Broken Hill Severe Thunderstorm,1
+1012,2022-02-22,,Eastern NSW,NSW,flood,NSW Severe Weather and Flooding from 22 February 2022,64
+1001,2022-01-05,,Southern NSW,NSW,flood,Southern NSW Storms and Floods,21
+996,2022-01-11,,Lithgow,NSW,storm,Lithgow Severe Storm and Flash Flooding,1
+993,2021-12-19,,Northern Beaches,NSW,storm,Northern Beaches Severe Storm,1
+992,2021-07-30,,Forbes and Upper Lachlan,NSW,flood,NSW Storms and Floods,2
+989,2021-09-30,,Narrabri,NSW,storm,Narrabri Storm and Tornado,1
+987,2021-11-09,,Central and Western NSW,NSW,flood,NSW Severe Weather and Flooding,64
+982,2021-10-23,,Wollondilly,NSW,storm,Severe Weather Event Across NSW,1
+981,2021-08-22,,Oberon,NSW,flood,NSW Storms and Floods,1
+980,2021-10-20,,Coffs Harbour,NSW,storm,North East NSW Severe Weather,1
+979,2021-10-14,,Armidale,NSW,storm,Armidale Storm,1
+975,2021-07-16,,Glen Innes Severn and Inverell,NSW,flood,NSW Storms and Floods,2
+976,2021-06-10,,Cabonne,NSW,storm,NSW Storms,1
+970,2021-05-05,,Bega Valley and Eurobodalla,NSW,flood,Southern NSW Storms and Floods,4
+967,2021-02-03,,Snowy Valleys,NSW,storm,Snowy Valleys Storms,1
+960,2021-03-10,,Eastern and Central NSW,NSW,flood,NSW Storms and Floods,46
+959,2020-12-26,,Eurobodalla,NSW,storm,Eurobodalla Storms,1
+954,2021-02-19,,North Coast NSW,NSW,flood,NSW Storms and Floods,7
+948,2021-01-02,,Glen Innes Severn and Narromine,NSW,flood,NSW Storms and Floods,4
+943,2020-12-10,,Northern NSW,NSW,flood,NSW Storms and Floods,19
+949,2020-12-02,,Brewarrina and Glen Innes Severn,NSW,storm,NSW Storms,3
+945,2020-11-28,,Hilltops and Upper Lachlan,NSW,storm,NSW Storms,4
+936,2020-10-20,,Armidale and Bega Valley,NSW,flood,NSW Storms and Floods,8
+938,2020-08-18,,Cabonne and Oberon,NSW,storm,Central NSW Storms,2
+923,2020-08-05,,Southern NSW,NSW,flood,NSW Storms and Floods,16
+922,2020-07-25,,Bega Valley and Central Coast,NSW,flood,NSW Storms and Floods,8
+918,2020-04-10,,Western NSW,NSW,flood,Western NSW Storms and Floods,6
+917,2020-04-03,,Western NSW,NSW,flood,Western NSW Storms and Floods,5
+919,2020-03-25,,Cabonne,NSW,flood,Cabonne Shire Storms and Floods,1
+916,2020-02-26,,Western NSW,NSW,flood,Western NSW Floods,3
+898,2020-01-15,,Eastern NSW,NSW,flood,NSW Storms and Floods,51
+878,2019-11-26,,Greater Sydney,NSW,storm,NSW Storms,10
+881,2019-09-05,,Greater Sydney,NSW,storm,Sydney and Southern Highlands Storms,6
+871,2019-08-31,,NSW,NSW,bushfire,NSW Bushfires 2019-20,45
+880,2019-07-18,,North Coast NSW,NSW,bushfire,NSW North Coast Bushfires,7
+911,2019-06-29,,Berrigan,NSW,flood,Berrigan Shire Storms,1
+869,2019-04-22,,Carrathool,NSW,flood,Carrathool Floods,1
+868,2019-03-29,,Gilgandra and Warrumbungle,NSW,flood,Central West and Orana Storms and Floods,2
+864,2019-03-09,,Tenterfield,NSW,bushfire,Tenterfield Bushfires,1
+843,2019-02-11,,Armidale and Inverell and Kyogle,NSW,bushfire,Northern NSW Bushfires,4
+862,2019-02-11,,Tamworth and Upper Hunter,NSW,bushfire,Tamworth Regional and Upper Hunter Bushfires,2
+867,2019-02-11,,Muswellbrook and Singleton,NSW,bushfire,Singleton and Muswellbrook Bushfires,2
+861,2019-02-08,,Greater Sydney,NSW,storm,Eastern NSW Storms,6
+857,2019-02-05,,Hilltops and Cootamundra-Gundagai,NSW,flood,Hilltops and Cootamundra-Gundagai Storms and Floods,2
+856,2019-01-22,,Parkes and Greater Hume,NSW,storm,Parkes and Greater Hume Storms,2
+860,2019-01-17,,Snowy Valleys,NSW,bushfire,Snowy Valleys Bushfires,1
+845,2019-01-11,,Bathurst and Goulburn Mulwaree,NSW,flood,Inland NSW Storms and Floods,4
+853,2019-01-05,,Cabonne and Parkes,NSW,bushfire,Parkes and Cabonne Bushfire,2
+866,2019-01-05,,Newcastle,NSW,bushfire,Newcastle Kooragang Island Bushfires,1
+855,2019-01-03,,Tamworth,NSW,bushfire,Tamworth Halls Creek Road Bushfire,1
+851,2018-12-25,,Glen Innes Severn,NSW,bushfire,Glen Innes Severn Highland Creek Bushfire,1
+834,2018-12-20,,Greater Sydney and Northern NSW,NSW,flood,NSW Storms and Floods,32
+833,2018-12-13,,Central and Western NSW,NSW,flood,NSW Storms and Floods,14
+847,2018-12-01,,Armidale,NSW,bushfire,Armidale Melrose Bushfire,1
+842,2018-11-22,,Cessnock and Port Stephens,NSW,bushfire,Port Stephens and Cessnock Bushfires,2
+841,2018-10-30,,Tamworth,NSW,bushfire,Tamworth Rockview Bushfire,1
+820,2018-08-15,,Bega Valley and Eurobodalla,NSW,bushfire,Bega Valley and Eurobodalla Bushfires,2
+819,2018-08-15,,Cessnock and Port Stephens,NSW,bushfire,Cessnock and Port Stephens Bushfires,2
+824,2018-08-14,,Clarence Valley and Glen Innes Severn,NSW,bushfire,Clarence Valley and Glen Innes Severn Bushfires,2
+823,2018-08-12,,Kyogle and Lismore and Richmond Valley,NSW,bushfire,Richmond Valley Lismore and Kyogle Bushfires,3
+818,2018-08-11,,Shoalhaven,NSW,bushfire,Shoalhaven Bushfires,1
